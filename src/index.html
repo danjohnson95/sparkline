@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+  <title>Stencil Component Starter</title>
+
+  <script type="module" src="/build/sparkline.esm.js"></script>
+  <script nomodule src="/build/sparkline.js"></script>
+
+  <style>
+    dan-sparkline {
+      display: block;
+      width: 400px;
+    }
+  </style>
+</head>
+<body>
+
+  <dan-sparkline
+    width=400
+    height=100
+    data="10,6,26,37,62,86,89,75,102,150,64,22,50"
+    stroke-color="hsl(204, 86%, 53%)"
+    stroke-width="3"
+    spot-size="3"
+    cursor-width=0
+    animated=true
+  ></dan-sparkline>
+
+  <small id="currentValBox" style="opacity:0">Current value: <strong id="currentVal"></strong></small>
+
+  <script>
+    const elm = document.getElementsByTagName('dan-sparkline')[0];
+    const currentValBox = document.getElementById('currentValBox');
+    const currentVal = document.getElementById('currentVal');
+
+    elm.addEventListener('cursorMoved', (event) => {
+      if (event.detail) {
+        currentValBox.style.opacity = 1;
+        currentVal.innerText = event.detail.value;
+      } else {
+        currentValBox.style.opacity = 0;
+      }
+    })
+  </script>
+
+</body>
+</html>
